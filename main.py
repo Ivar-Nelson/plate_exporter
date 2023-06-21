@@ -23,7 +23,7 @@ with zipfile.ZipFile('plates.zip', 'r') as zf:
     
     for path in zf.namelist():
         if path.endswith('/'):
-            print(path.split('/')[1][-4:])
+            base = path.split('/')[1][-4:]
         start = path.rfind('/')
         file = path[start+1:]
         if file.endswith('.pdf'):
@@ -34,7 +34,7 @@ with zipfile.ZipFile('plates.zip', 'r') as zf:
             with open(abs_path, 'rb') as plate:
                 digest = hashlib.file_digest(plate, 'md5')
             # print(digest.hexdigest())
-            print(tuple(t + rwy + [digest.hexdigest()]))
+            print(tuple([base]+ t + rwy + [digest.hexdigest()]))
             # print(data)
 
             
