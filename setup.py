@@ -8,7 +8,7 @@ from contextlib import closing
 
 def init_conf():
     with open('../config/plate_exporter.conf', 'r') as f:
-        auth = f.read().splitlines()
+        auth = tuple(f.read().splitlines())
     return auth
 
 def make_db(rows, columns):
@@ -65,7 +65,7 @@ def unzip_plates():
 
 
 def main():
-    # download_plates()
+    download_plates()
     rows, types = unzip_plates()
     make_db(rows, types)
 
